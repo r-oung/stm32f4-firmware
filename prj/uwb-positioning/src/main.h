@@ -39,11 +39,7 @@
  */
 
 /* Public typedef ------------------------------------------------------------*/
-#define _LNS_V03 // old modules
-
 /* Public define -------------------------------------------------------------*/
-#ifdef _LNS_V03
-
 #define LED1_CLK RCC_AHB1Periph_GPIOB
 #define LED1_PORT GPIOB
 #define LED1_PIN GPIO_Pin_12
@@ -155,100 +151,6 @@
 #define DW1000_TX_PIN_SRC GPIO_PinSource4
 #define DW1000_TX_LINE EXTI_Line4
 #define DW1000_TX_IRQ EXTI4_IRQn
-
-#else // _DWM1000_V02
-
-#define LED1_CLK RCC_AHB1Periph_GPIOB
-#define LED1_PORT GPIOB
-#define LED1_PIN GPIO_Pin_0
-
-#define I2C1_SPEED 100000 // [Hz]
-#define I2C1_SDA_CLK RCC_AHB1Periph_GPIOB
-#define I2C1_SDA_PORT GPIOB
-#define I2C1_SDA_PIN GPIO_Pin_9
-#define I2C1_SDA_PIN_SOURCE GPIO_PinSource9
-#define I2C1_SCL_CLK RCC_AHB1Periph_GPIOB
-#define I2C1_SCL_PORT GPIOB
-#define I2C1_SCL_PIN GPIO_Pin_8
-#define I2C1_SCL_PIN_SOURCE GPIO_PinSource8
-
-#define SPI2_MOSI_CLK RCC_AHB1Periph_GPIOB
-#define SPI2_MOSI_PORT GPIOB
-#define SPI2_MOSI_PIN GPIO_Pin_15
-#define SPI2_MOSI_PIN_SRC GPIO_PinSource15
-#define SPI2_MISO_CLK RCC_AHB1Periph_GPIOB
-#define SPI2_MISO_PORT GPIOB
-#define SPI2_MISO_PIN GPIO_Pin_14
-#define SPI2_MISO_PIN_SRC GPIO_PinSource14
-#define SPI2_SCLK_CLK RCC_AHB1Periph_GPIOB
-#define SPI2_SCLK_PORT GPIOB
-#define SPI2_SCLK_PIN GPIO_Pin_13
-#define SPI2_SCLK_PIN_SRC GPIO_PinSource13
-
-#define UART2_BAUD 115200
-#define UART2_DMA_BUF_SIZE 165u
-#define UART2_TX_CLK RCC_AHB1Periph_GPIOA
-#define UART2_TX_PORT GPIOA
-#define UART2_TX_PIN GPIO_Pin_2
-#define UART2_TX_PIN_SRC GPIO_PinSource2
-#define UART2_RX_CLK RCC_AHB1Periph_GPIOA
-#define UART2_RX_PORT GPIOA
-#define UART2_RX_PIN GPIO_Pin_3
-#define UART2_RX_PIN_SRC GPIO_PinSource3
-
-#define DW1000_SPI SPI2
-
-#define DW1000_EN_CLK RCC_AHB1Periph_GPIOB
-#define DW1000_EN_PORT GPIOB
-#define DW1000_EN_PIN GPIO_Pin_3
-
-#define DW1000_CS_CLK RCC_AHB1Periph_GPIOC
-#define DW1000_CS_PORT GPIOC
-#define DW1000_CS_PIN GPIO_Pin_6
-
-#define DW1000_WAKE_CLK RCC_AHB1Periph_GPIOB
-#define DW1000_WAKE_PORT GPIOB
-#define DW1000_WAKE_PIN GPIO_Pin_2
-
-#define DW1000_NRST_CLK RCC_AHB1Periph_GPIOB
-#define DW1000_NRST_PORT GPIOB
-#define DW1000_NRST_PIN GPIO_Pin_10
-
-#define DW1000_EXTON_CLK RCC_AHB1Periph_GPIOB
-#define DW1000_EXTON_PORT GPIOB
-#define DW1000_EXTON_PIN GPIO_Pin_1
-#define DW1000_EXTON_PORT_SRC EXTI_PortSourceGPIOB
-#define DW1000_EXTON_PIN_SRC GPIO_PinSource1
-#define DW1000_EXTON_LINE EXTI_Line1
-#define DW1000_EXTON_IRQ EXTI1_IRQn
-
-#define DW1000_IRQ_CLK RCC_AHB1Periph_GPIOB
-#define DW1000_IRQ_PORT GPIOB
-#define DW1000_IRQ_PIN GPIO_Pin_12
-#define DW1000_IRQ_PORT_SRC EXTI_PortSourceGPIOB
-#define DW1000_IRQ_PIN_SRC GPIO_PinSource12
-#define DW1000_IRQ_LINE EXTI_Line12
-#define DW1000_IRQ_IRQ EXTI15_10_IRQn
-
-#define DW1000_RXOK_CLK RCC_AHB1Periph_GPIOC
-#define DW1000_RXOK_PORT GPIOC
-#define DW1000_RXOK_PIN GPIO_Pin_7
-#define DW1000_RXOK_PORT_SRC EXTI_PortSourceGPIOC
-#define DW1000_RXOK_PIN_SRC GPIO_PinSource7
-#define DW1000_RXOK_LINE EXTI_Line7
-#define DW1000_RXOK_IRQ EXTI9_5_IRQn
-
-#define DW1000_TX_CLK RCC_AHB1Periph_GPIOB
-#define DW1000_TX_PORT GPIOB
-#define DW1000_TX_PIN GPIO_Pin_11
-#define DW1000_TX_PORT_SRC EXTI_PortSourceGPIOB
-#define DW1000_TX_PIN_SRC GPIO_PinSource11
-#define DW1000_TX_LINE EXTI_Line11
-#define DW1000_TX_IRQ EXTI15_10_IRQn
-
-#define M24AA02UID_I2C I2C1
-#define MPU9150_I2C I2C1
-#endif
 
 #ifdef __cplusplus
 extern "C" {

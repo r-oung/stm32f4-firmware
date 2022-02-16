@@ -155,12 +155,7 @@
  * @{
  */
 #ifdef _VERBOSE
-#ifdef _LNS_V03
-#define VERBOSE_UART_ID 4u // LNS-v03
-#else
-#define VERBOSE_UART_ID 2u // DWM1000-v02
-#endif
-
+#define VERBOSE_UART_ID 4u
 #endif
 
 #define DEVICE_ID                                                              \

@@ -61,11 +61,7 @@
  * ------------------------------------------------------------*/
 // #define RANGING_DEMO
 
-#ifdef _LNS_V03
-#define VERBOSE_UART_ID 4u // LNS-v03
-#else
-#define VERBOSE_UART_ID 2u // DWM1000-v02
-#endif
+#define VERBOSE_UART_ID 4u
 #define START_BYTE '@'
 #define F_CUTOFF 20.0f // [Hz]
 
@@ -265,7 +261,6 @@ int main(void) {
   //========================================================================
   // DECLARE STATIC NODES
   //========================================================================
-#if 0 // TABLE DEMO
 	UWB_node_t node00;
 	node00.uid = 0x00;
 	node00.type = NODE_STATIC;
@@ -349,96 +344,6 @@ int main(void) {
 	node0B.x = 0.0f;
 	node0B.y = 0.8f;
 	node0B.z = 0.0f;
-#else // YOTSUYA OFFICE DEMO
-  UWB_node_t node00; // M0
-  node00.uid = 0x00;
-  node00.type = NODE_STATIC;
-  node00.bias = 154.223624750499f;
-  node00.x = 0.71f;
-  node00.y = 0.75f;
-  node00.z = 2.498f;
-
-  UWB_node_t node01; // M1
-  node01.uid = 0x01;
-  node01.type = NODE_STATIC;
-  node01.bias = 154.242572614108f;
-  node01.x = 5.47f;
-  node01.y = 0.59f;
-  node01.z = 2.499f;
-
-  UWB_node_t node02; // M2
-  node02.uid = 0x02;
-  node02.type = NODE_STATIC;
-  node02.bias = 154.258135779817f;
-  node02.x = 5.50f;
-  node02.y = 3.50f;
-  node02.z = 2.500f;
-
-  UWB_node_t node03; // M3
-  node03.uid = 0x03;
-  node03.type = NODE_STATIC;
-  node03.bias = 154.260341904762f;
-  node03.x = 0.62f;
-  node03.y = 3.47f;
-  node03.z = 2.501f;
-
-  UWB_node_t node04; // M4
-  node04.uid = 0x04;
-  node04.type = NODE_STATIC;
-  node04.bias = 154.261841426404f; // slow changing bias
-  node04.x = 2.20f;
-  node04.y = 1.96f;
-  node04.z = 2.502f;
-
-  UWB_node_t node05; // M5
-  node05.uid = 0x05;
-  node05.type = NODE_STATIC;
-  node05.bias = 154.237874303506f;
-  node05.x = 4.15f;
-  node05.y = 1.96f;
-  node05.z = 2.503f;
-
-  UWB_node_t node06; // P0
-  node06.uid = 0x06;
-  node06.type = NODE_STATIC;
-  node06.bias = 154.263274015748f;
-  node06.x = 3.68f;
-  node06.y = 6.85f;
-  node06.z = 2.20f;
-
-  UWB_node_t node07; // P1
-  node07.uid = 0x07;
-  node07.type = NODE_STATIC;
-  node07.bias =
-      154.270061452514; // bias takes a long time to reach steady state
-  node07.x = 3.82f;
-  node07.y = 5.54f;
-  node07.z = 2.50f;
-
-  UWB_node_t node08; // P2
-  node08.uid = 0x08;
-  node08.type = NODE_STATIC;
-  node08.bias = 154.200980021031f;
-  node08.x = 1.97f;
-  node08.y = 4.21f;
-  node08.z = 2.50f;
-
-  UWB_node_t node09; // P3
-  node09.uid = 0x09;
-  node09.type = NODE_STATIC;
-  node09.bias = 154.2;
-  node09.x = 0.82f;
-  node09.y = 7.07f;
-  node09.z = 2.20f;
-
-  UWB_node_t node0A; // P3
-  node0A.uid = 0x0A;
-  node0A.type = NODE_STATIC;
-  node0A.bias = 154.2;
-  node0A.x = 0.0f;
-  node0A.y = 0.0f;
-  node0A.z = 0.0f;
-#endif
 
   //========================================================================
   // DECLARE MOBILE NODES
@@ -493,7 +398,6 @@ int main(void) {
   Delay(500);
   LED_OffAll();
 
-#ifdef _LNS_V03
   DIP_Init(ADDR0_CLK, ADDR0_PORT, ADDR0_PIN);
   DIP_Init(ADDR1_CLK, ADDR1_PORT, ADDR1_PIN);
   DIP_Init(ADDR2_CLK, ADDR2_PORT, ADDR2_PIN);
@@ -526,72 +430,8 @@ int main(void) {
               DW1000_IRQ_PIN_SRC, DW1000_IRQ_LINE, DW1000_IRQ_IRQ,
               DW1000_IRQ_NVIC_PREEMPTION_PRIORITY);
 
-#else
-  UART_PeriphInit(UART2, UART2_BAUD, UART2_DMA_BUF_SIZE, UART2_TX_CLK,
-                  UART2_TX_PORT, UART2_TX_PIN, UART2_TX_PIN_SRC, UART2_RX_CLK,
-                  UART2_RX_PORT, UART2_RX_PIN, UART2_RX_PIN_SRC,
-                  UART2_DMA_RX_NVIC_PREEMPTION_PRIORITY,
-                  UART2_DMA_TX_NVIC_PREEMPTION_PRIORITY,
-                  UART2_IT_RX_NVIC_PREEMPTION_PRIORITY,
-                  UART2_IT_TX_NVIC_PREEMPTION_PRIORITY);
-
-  SPI_PeriphInit(SPI2, SPI_BAUD_SLOW, SPI_CPOL0, SPI_CPHA0, SPI2_MOSI_CLK,
-                 SPI2_MOSI_PORT, SPI2_MOSI_PIN, SPI2_MOSI_PIN_SRC,
-                 SPI2_MISO_CLK, SPI2_MISO_PORT, SPI2_MISO_PIN,
-                 SPI2_MISO_PIN_SRC, SPI2_SCLK_CLK, SPI2_SCLK_PORT,
-                 SPI2_SCLK_PIN, SPI2_SCLK_PIN_SRC);
-
-  DW1000_Init(DW1000_SPI, DW1000_EN_CLK, DW1000_EN_PORT, DW1000_EN_PIN,
-              DW1000_CS_CLK, DW1000_CS_PORT, DW1000_CS_PIN, DW1000_WAKE_CLK,
-              DW1000_WAKE_PORT, DW1000_WAKE_PIN, DW1000_NRST_CLK,
-              DW1000_NRST_PORT, DW1000_NRST_PIN, DW1000_IRQ_CLK,
-              DW1000_IRQ_PORT, DW1000_IRQ_PIN, DW1000_IRQ_PORT_SRC,
-              DW1000_IRQ_PIN_SRC, DW1000_IRQ_LINE, DW1000_IRQ_IRQ,
-              DW1000_IRQ_NVIC_PREEMPTION_PRIORITY);
-
-  I2C_PeriphInit(I2C1, I2C1_SPEED, I2C1_SDA_CLK, I2C1_SDA_PORT, I2C1_SDA_PIN,
-                 I2C1_SDA_PIN_SOURCE, I2C1_SCL_CLK, I2C1_SCL_PORT, I2C1_SCL_PIN,
-                 I2C1_SCL_PIN_SOURCE, I2C1_NVIC_PREEMPTION_PRIORITY);
-
-  M24AA02UID_Init(M24AA02UID_I2C);
-
-  MPU9150_Init(MPU9150_I2C, MPU9150_BANDWIDTH_98, MPU9150_GYRO_RANGE_250,
-               MPU9150_ACCL_RANGE_2);
-
-#if 0
-	char out[100]; sprintf(out,"UID: %u\r\n", (unsigned int)M24AA02UID_GetUID()); UART_Print(VERBOSE_UART_ID,out);
-
-	NAV_Init();
-	NAV_CalibrateStatic(1000);
-
-	// while(1)
-	// {
-	// 	LED_Blink(0,100);
-	// 	Delay(10);
-
-	// 	MPU9150_ReadSensor();
-	// 	AK8975_ReadSensor();
-
-	// 	char str[100]; 
-	// 	sprintf(str, "%.3f %.3f %.3f %.3f %.3f %.3f %.3f %.3f %.3f %.3f\r\n", 
-	// 		GetTimeU(),
-	// 		MPU9150_GetGyroX(), MPU9150_GetGyroY(), MPU9150_GetGyroZ(),
-	// 		MPU9150_GetAcclX(), MPU9150_GetAcclY(), MPU9150_GetAcclZ(),
-	// 		MPU9150_GetMagnX(), MPU9150_GetMagnY(), MPU9150_GetMagnZ());
-	// 	UART_Print(VERBOSE_UART_ID,str);
-	
-	// 	NAV_SensGyro(MPU9150_GetGyroX(), MPU9150_GetGyroY(), MPU9150_GetGyroZ());
-	// 	NAV_SensAccl(MPU9150_GetAcclX(), MPU9150_GetAcclY(), MPU9150_GetAcclZ());
-	// 	NAV_SensMagn(MPU9150_GetMagnX(), MPU9150_GetMagnY(), MPU9150_GetMagnZ());
-	
-	// }
-#endif
-
-#endif
-
   // DIP_SetVal(node0A.uid);
-  DIP_SetVal(nodeF0.uid); // <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
-                          // MANUALLY SET NODE ID HERE!!!
+  DIP_SetVal(nodeF0.uid); // MANUALLY SET NODE ID HERE!!!
 
   //========================================================================
   // DW1000 UWB CONFIGURATION
@@ -729,16 +569,12 @@ int main(void) {
 
     // check that static node-ID is valid
     if (id < NUM_STATIC_NODES) {
-#if 0 // send a probe after receiving a response or timing out
-			Delay(10);
-#else
       uint32_t t1 = GetTime();
       while (!NODE_GetTxReady()) {
         if (GetTime() - t1 > PROBE_TIMEOUT) {
           break;
         }
       }
-#endif
 
       // send ranging probe and adjust token destination ID
       if (id == NUM_STATIC_NODES - 1u) {
@@ -758,7 +594,9 @@ int main(void) {
       id++;
     } else // after probing all nodes, run trilateration, etc.
     {
+
 #ifdef RANGING_DEMO // ranging demo
+
 
       if (GetTime() > 15000u) // wait for warmup
       {
@@ -835,7 +673,8 @@ int main(void) {
         }
       }
 
-#else // localisation demo
+#else // positioning demo
+      #define NODE_THRESHOLD 6u
 
       // run trilateration when range to a sufficient number of static nodes is
       // known
@@ -858,20 +697,11 @@ int main(void) {
         }
       }
 
-// YOTSUYA OFFICE ROOM FILTER
-#define YOTSUYA_CONFERENCE_ROOM_THRESHOLD_X 6.60f
-#define YOTSUYA_CONFERENCE_ROOM_THRESHOLD_Y 4.05f
-#define YOTSUYA_PRESIDENT_OFFICE_THRESHOLD_X 5.60f
-#define YOTSUYA_PRESIDENT_OFFICE_THRESHOLD_Y 7.85f
-#define YOTSUYA_NODE_THRESHOLD 6u
       if (TRILAT_UpdateStaticNodes() == 1u) {
         TRILAT_UpdateMobileNode(s_range);
 
         if (!isnan(TRILAT_GetX()) && !isnan(TRILAT_GetY()) &&
-            !isnan(TRILAT_GetZ()) && TRILAT_GetX() > 0.0f &&
-            TRILAT_GetX() < YOTSUYA_CONFERENCE_ROOM_THRESHOLD_X &&
-            TRILAT_GetY() > 0.0f &&
-            TRILAT_GetY() < YOTSUYA_CONFERENCE_ROOM_THRESHOLD_Y) {
+            !isnan(TRILAT_GetZ())) {
           LED_On(0);
 
           // run trilateration when range to a sufficient number of static nodes
@@ -882,7 +712,7 @@ int main(void) {
             s_range[i] = 0.0f; // clear buffer
 
             // now trilaterate only on selected nodes
-            if (static_nodes[i].uid < YOTSUYA_NODE_THRESHOLD) {
+            if (static_nodes[i].uid < NODE_THRESHOLD) {
               // float val = NODE_GetRange(static_nodes[i].uid); // [m] USE WHEN
               // CALIBRATING
               float val = NODE_GetRange(static_nodes[i].uid) -
@@ -902,61 +732,11 @@ int main(void) {
             TRILAT_UpdateMobileNode(s_range);
             UTIL_OutputTelemetry(num_selected_nodes, this_node, static_nodes,
                                  s_range);
-            // UTIL_Output2Console(num_selected_nodes, NUM_STATIC_NODES,
-            // static_nodes, s_range);
-          }
-        } else if (!isnan(TRILAT_GetX()) && !isnan(TRILAT_GetY()) &&
-                   !isnan(TRILAT_GetZ()) && TRILAT_GetX() > 0.0f &&
-                   TRILAT_GetX() < YOTSUYA_PRESIDENT_OFFICE_THRESHOLD_X &&
-                   TRILAT_GetY() > YOTSUYA_CONFERENCE_ROOM_THRESHOLD_Y &&
-                   TRILAT_GetY() < YOTSUYA_PRESIDENT_OFFICE_THRESHOLD_Y) {
-          LED_On(0);
-
-          // run trilateration when range to a sufficient number of static nodes
-          // is known
-          uint8_t num_selected_nodes = 0u;
-          float s_range[NUM_STATIC_NODES]; // selected valid range values
-          for (i = 0u; i < NUM_STATIC_NODES; i++) {
-            s_range[i] = 0.0f; // clear buffer
-
-            // now trilaterate only on selected nodes
-            if (static_nodes[i].uid >= YOTSUYA_NODE_THRESHOLD ||
-                static_nodes[i].uid == 3u) {
-              // float val = NODE_GetRange(static_nodes[i].uid); // [m] USE WHEN
-              // CALIBRATING
-              float val = NODE_GetRange(static_nodes[i].uid) -
-                          static_nodes[i].bias; // [m]
-              if (val > 0.0f && val < 8.0f)     // @TODO sometimes range is
-                                            // unusually large, so filter it out
-              {
-                f_range[i] = UTIL_LPF1(f_range[i], val, lpf_alpha); // filtered
-                s_range[num_selected_nodes++] = f_range[i];
-                TRILAT_AddStaticNode(static_nodes[i].x, static_nodes[i].y,
-                                     static_nodes[i].z);
-              }
-            }
-          }
-
-          if (TRILAT_UpdateStaticNodes() == 1u) {
-            TRILAT_UpdateMobileNode(s_range);
-            UTIL_OutputTelemetry(num_selected_nodes, this_node, static_nodes,
-                                 s_range);
-            // UTIL_Output2Console(num_selected_nodes, NUM_STATIC_NODES,
-            // static_nodes, s_range);
           }
         } else {
           LED_Off(0);
-          // UTIL_Output2Console(num_selected_nodes, NUM_STATIC_NODES,
-          // static_nodes, s_range);
         }
       }
-
-      //----------------------------------------------------------------------------------------------------------
-      // DEBUG
-      //----------------------------------------------------------------------------------------------------------
-      // UTIL_OutputTelemetry(num_selected_nodes, this_node, static_nodes,
-      // s_range); // debug UTIL_Output2Console(num_selected_nodes,
-      // NUM_STATIC_NODES, static_nodes, f_range);
 
       //----------------------------------------------------------------------------------------------------------
       // MULTIPLE MOBILE NODES: WAIT FOR TOKEN
@@ -986,9 +766,7 @@ int main(void) {
         }
         DW1000_RxTimeout(ENABLE);
       }
-
 #endif
-
       id = 0u; // reset node
     }
   }
