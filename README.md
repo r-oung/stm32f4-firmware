@@ -114,7 +114,7 @@ make flash
 
 
 ## Related Work
-The firmware in these projects were written for the PCBs in the [stm32f4-hardware repository](https://github.com/r-oung/stm32f4-hardware).
+The firmware in these projects were written for the PCBs in the [Electronics EAGLE repository](https://github.com/r-oung/electronics-eagle).
 
 
 ## Licenses
